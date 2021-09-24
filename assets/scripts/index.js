@@ -1,18 +1,28 @@
+let access_token = undefined;
+
+const getToken = () => {
+    $.ajax({
+        type: "POST",
+        url: "src/get_token.php",
+        data: "",
+        success: (response) => {
+            // data = JSON.parse(response);
+            // access_token = data.access_token;
+            access_token = response;
+        }
+    });
+}
+
+getToken();
+
+setTimeout(() => {
+    //console.log(access_token);
+    // if (access_token === undefined) location.reload();
+}, 2000);
+
+
 let show_data = $("#result");
-
-//  ajax to get access token
-let access_token;
-
-$.ajax({
-    type: "POST",
-    url: "src/get_token.php",
-    data: "",
-    success: (response) => {
-        data = JSON.parse(response);
-        access_token = data.access_token;
-    }
-});
-
+/*
 $('#payment_link').click(() => {
     $.ajax({
         type: "POST",
@@ -71,8 +81,50 @@ $("#test_transactions").click((e) => {
     });
 });
 
+*/
 
-setTimeout(() => {
-    console.log(access_token);
-}, 2000)
 
+$("#payWithBTC").click((e) => {
+    e.preventDefault();
+
+    let monto = parseFloat($(".monto-total").text().replace('$', ''));
+
+    let data = {
+        "monto": monto,
+        "emailCliente": $("#client_email").val(),
+        "nombreCliente": $("#client_name").val(),
+        "apellidoCliente": $("#client_lastname").val(),
+        "fechaNacimientoCliente": "2000-09-23 10:18:00",
+        "documentoIdentidadCliente": $("#client_DUI").val(),
+        "direccionCliente": $("#client_dir").val(),
+        "idRegion": $("#client_region").val(),
+        "idTerritorio": $("#client_territorio").val(),
+        "configuracion": {
+            "emailsNotificacion": "luisjosecruzmart@gmail.com",
+            "urlWebhook": "https://developer.cuotta.com/wompi/webhook.php",
+            "telefonosNotificacion": "61760155",
+            "notificarTransaccionCliente": true
+        },
+        "access_token": access_token
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "src/transactions_btc.php",
+        data: data ,
+        success: (response) => {
+            //showPaidLinks(response);
+            console.log(response);
+            console.dir(JSON.parse(response));
+            let data = JSON.parse(response);
+            let datos = data["datosBitcoin"];
+            let qr = datos["urlQR"];
+            html =`<p>QR</p> 
+                <img src='${qr}' width="250px">
+            `;
+            
+            $(".modal-items").html(html);
+            toggleModal();
+        }
+    });
+});

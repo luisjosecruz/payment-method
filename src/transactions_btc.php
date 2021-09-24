@@ -1,10 +1,13 @@
 <?php 
 
+define('ACCESS_TOKEN', $_POST['access_token']);
+
 $data = $_POST;
 
 $curl = curl_init();
+
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.wompi.sv/TransaccionCompra",
+  CURLOPT_URL => "https://api.wompi.sv/TransaccionCompra/Bitcoin",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -13,14 +16,17 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => json_encode($data),
   CURLOPT_HTTPHEADER => array(
-    "authorization: Bearer " . $_POST['access_token'],
+    "authorization: Bearer " . ACCESS_TOKEN,
     "content-type: application/json"
   ),
 ));
 
 $response = curl_exec($curl);
-$error = curl_error($curl);
+$err = curl_error($curl);
+
 curl_close($curl);
+
+//$data = json_decode($response, true);
 
 echo $response;
 
