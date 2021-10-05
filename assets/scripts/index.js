@@ -1,28 +1,11 @@
-let access_token = undefined;
-
-const getToken = () => {
-    $.ajax({
-        type: "POST",
-        url: "src/get_token.php",
-        data: "",
-        success: (response) => {
-            // data = JSON.parse(response);
-            // access_token = data.access_token;
-            access_token = response;
-        }
-    });
-}
-
-getToken();
-
-setTimeout(() => {
-    //console.log(access_token);
-    // if (access_token === undefined) location.reload();
-}, 2000);
 
 
-let show_data = $("#result");
+
+// let show_data = $("#result");
+
+
 /*
+
 $('#payment_link').click(() => {
     $.ajax({
         type: "POST",
@@ -37,7 +20,8 @@ $('#payment_link').click(() => {
 const showPaidLinks = json => {
     show_data.html(json);
 }
-
+*/
+/*
 // test transactions
 $("#test_transactions").click((e) => {
     e.preventDefault();
@@ -49,21 +33,21 @@ $("#test_transactions").click((e) => {
     let data = {
         "tarjetaCreditoDebido": {
             "numeroTarjeta": $("#card_number").val(),
-            "cvv": $("#cvv").val(),
-            "mesVencimiento": $("#expire_month").val(),
-            "anioVencimiento": $("#expire_year").val()
+            "cvv": $("#card_cvv").val(),
+            "mesVencimiento": $("#card_month").val(),
+            "anioVencimiento": $("#card_year").val()
         },
-        "monto": $("#amount").val(),
-        "emailCliente": $("#email").val(),
-        "nombreCliente": $("#client").val(),
+        "monto": 5,
+        "emailCliente": 'lcruz@elmundo.sv',
+        "nombreCliente": 'Luis Cruz',
         "formaPago": "PagoNormal",
         "configuracion": {
-            "emailsNotificacion": "",
+            "emailsNotificacion": "luisjosecruzmart@gmail.com",
             "urlWebhook": "https://developer.cuotta.com/wompi/webhook.php",
             "notificarTransaccionCliente": true
         },
         "datosAdicionales": {
-            "Mandamiento": $("#mand").val(),
+            "Test": "Test 01",
             "fecha": date
         },
         "access_token": access_token
@@ -74,15 +58,11 @@ $("#test_transactions").click((e) => {
         url: "src/transactions.php",
         data: data ,
         success: (response) => {
-            //showPaidLinks(response);
             console.log(response);
             console.dir(JSON.parse(response));
         }
     });
 });
-
-*/
-
 
 $("#payWithBTC").click((e) => {
     e.preventDefault();
@@ -90,11 +70,11 @@ $("#payWithBTC").click((e) => {
     let monto = parseFloat($(".monto-total").text().replace('$', ''));
 
     let data = {
-        "monto": monto,
+        "monto": 5,
         "emailCliente": $("#client_email").val(),
         "nombreCliente": $("#client_name").val(),
         "apellidoCliente": $("#client_lastname").val(),
-        "fechaNacimientoCliente": "2000-09-23 10:18:00",
+        "fechaNacimientoCliente": "1974-07-25 12:18:00",
         "documentoIdentidadCliente": $("#client_DUI").val(),
         "direccionCliente": $("#client_dir").val(),
         "idRegion": $("#client_region").val(),
@@ -119,12 +99,9 @@ $("#payWithBTC").click((e) => {
             let data = JSON.parse(response);
             let datos = data["datosBitcoin"];
             let qr = datos["urlQR"];
-            html =`<p>QR</p> 
-                <img src='${qr}' width="250px">
-            `;
+            html =`<img src='${qr}' width="300px">`;
             
-            $(".modal-items").html(html);
-            toggleModal();
+            createModal("Success", "BTC PAY", html);
         }
     });
-});
+});*/

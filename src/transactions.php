@@ -1,5 +1,11 @@
 <?php 
 
+require_once("config/env.php");
+require_once("config/token.php");
+
+(new Env())->load();
+$token = (new Token())->getToken();
+
 $data = $_POST;
 
 $curl = curl_init();
@@ -13,7 +19,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => json_encode($data),
   CURLOPT_HTTPHEADER => array(
-    "authorization: Bearer " . $_POST['access_token'],
+    "authorization: Bearer " . $token,
     "content-type: application/json"
   ),
 ));

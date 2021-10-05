@@ -25,7 +25,7 @@ switch ($requestMethod) {
 
 // handle method POST
 function handlePost ($post, $conn, $token) {
-    //$json = json_encode($post);
+    $json = json_encode($post);
 
     $cliente = $post['Cliente'];
     $aplicativo = $post['Aplicativo'];
@@ -43,11 +43,13 @@ function handlePost ($post, $conn, $token) {
    if (isAVT($idTransaccion, $token)) {
         $query = "
             INSERT INTO abonos(
-                movID, abonoCorr, abonoFecha, abonoHora, abonoSucursal, abonoBruto, mandCorrelativo, abonoUsuario
+                movID, abonoCorr, abonoFecha, abonoHora, abonoSucursal, abonoBruto, mandCorrelativo, abonoUsuario, data
             ) VALUES (
-                '101-02', '$idTransaccion', '$fechaTrans', '$horaTrans', '$nombreAplicativo', $monto, '$mandamiento', 'admin1'
+                '101-02', '$idTransaccion', '$fechaTrans', '$horaTrans', '$nombreAplicativo', $monto, '$mandamiento', 'admin1', '$json'
             )
         ";
+
+        // $query = "INSERT INTO abono(json) VALUES ('$json')";
 
         if ($conn->query($query)) {
             echo "Done!";
@@ -90,11 +92,11 @@ function isAVT ($idTransaccion, $token) {
 
 // handle method GET
 function getData ($conn) {
-    $query = "SELECT * FROM abonos ORDER BY abonoID DESC LIMIT 10";
+    $query = "SELECT * FROM abonos ORDER BY abonoID DESC";
 
     if($result = $conn->query($query)){
         while($row = mysqli_fetch_array($result)){
-            echo $row['abonoID']." - ".$row['abonoCorr']." - ".$row['abonoBruto']."\n";
+            echo $row['abonoID']." - ".$row['abonoCorr']." - ".$row['abonoTStamp']." \n ".$row['data']."\n\n";
         }
     }else{
         echo "Error! ". $query;

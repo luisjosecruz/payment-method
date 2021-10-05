@@ -14,6 +14,7 @@
 }
 
 .info{
+    min-width: 500px;
     margin: 40px auto;
     padding: 25px;
     display: flex;
@@ -60,5 +61,10 @@
 }
 
 .form-group input, .form-group select{
-    border: 1px solid var(--just-dark);
+    border: 1px solid var(--gray);
+}
+
+.form-group input:focus{
+    border: 2px solid var(--darkgray);
+    box-shadow: inset 2px 4px 6px var(--black-rgba-15);
 }
