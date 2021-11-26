@@ -129,7 +129,7 @@ function payCardUSD () {
     let card_month = $("#card_month").val().trim();
     let card_year = $("#card_year").val().trim();
     let monto = parseFloat($(".monto-total").text().replace('$', ''));
-    monto = 3;
+    // monto = 3;
     let card_name = $("#card_name").val().trim();
     let card_email = $("#card_email").val().trim();
     let mandamiento = $(".mandamiento").text().trim();
