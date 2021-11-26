@@ -1,8 +1,11 @@
 <?php 
 
 // validate method
-if ($_SERVER['REQUEST_METHOD'] === "POST") $requestType = $_POST['requestType'];
-else exit("Something is wrong with the request method");
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $requestType = $_POST['requestType'];
+} else {
+    die("Something is wrong: The request method isn't post"); 
+}
 
 // handle request
 switch ($requestType) {
@@ -11,8 +14,12 @@ switch ($requestType) {
         $data = $_POST;
         $mand_obj = new Mandamientos();
         echo getInfoPay($data, $mand_obj);
-        break;
 
+        break;
+    case '':
+
+
+        break;
     default:
         # code...
         break;

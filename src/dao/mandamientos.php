@@ -21,9 +21,9 @@ class Mandamientos
                 INNER JOIN comunidades ON comunidades.comID = propiedades.comID
                 INNER JOIN vinculacion ON propiedades.propID = vinculacion.vincPropID
                 INNER JOIN contactos ON contactos.contID = vinculacion.vincContactoID
-            WHERE vinculacion.vincOrden = 1 AND mandamientos.mandCorrelativo = ?
+            WHERE vinculacion.vincOrden = 1 AND mandamientos.mandHash  = ?
         ");
-        $stmt->bind_param("s", $data["mandamiento"]);
+        $stmt->bind_param("s", $data["route"]);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
         

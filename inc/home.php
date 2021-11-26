@@ -1,7 +1,8 @@
 <main>
     <section class="container">
         <header class="pay-header">
-            <p class="mandamiento"><?=$mand?></p>
+            <p class="mandamiento"> --- </p>
+            <input type="hidden" id="route" value="<?=$route?>">
             <article class="info">
                 <div class="info-text">
                     <p class="info-casa"> . . . </p>
@@ -79,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn" id="test_transactions">Pagar $40.00</button>
+                                <button class="btn" id="test_transactions">Proceder a pagar</button>
                             </div>
                         </form>
                     </div>
@@ -134,21 +135,21 @@
                                     <span>Región</span>
                                     <select name="client_region" id="client_region">
                                         <option value="0" disabled>País</option>
-                                        <option value="CA">Canadá</option>
-                                        <option value="CR">Costa Rica</option>
+                                        <!-- <option value="CA">Canadá</option>
+                                        <option value="CR">Costa Rica</option> -->
                                         <option value="SV" selected>El Salvador</option>
-                                        <option value="US">Estados Unidos</option> 
+                                        <!-- <option value="US">Estados Unidos</option> 
                                         <option value="GT">Guatemala</option>
                                         <option value="HN">Honduras</option>
                                         <option value="MX">México</option>
                                         <option value="NI">Nicaragua</option>
-                                        <option value="PA">Panamá</option>
+                                        <option value="PA">Panamá</option> -->
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <span>Territorio</span>
                                     <select name="client_territorio" id="client_territorio">
-                                        <option value="0" selected disabled>Departamento</option>
+                                        <option value="0" disabled>Departamento</option>
                                         <option value="SV-AH">Ahuachapán</option>
                                         <option value="SV-CA">Cabañas</option>
                                         <option value="SV-CH">Chalatenango</option>
@@ -159,7 +160,7 @@
                                         <option value="SV-SA">Santa Ana</option>
                                         <option value="SV-SM">San Miguel</option>
                                         <option value="SV-SO">Sonsonate</option>
-                                        <option value="SV-SS">San Salvador</option>
+                                        <option value="SV-SS" selected>San Salvador</option>
                                         <option value="SV-SV">San Vicente</option>
                                         <option value="SV-UN">La Unión</option>
                                         <option value="SV-US">Usulután</option>

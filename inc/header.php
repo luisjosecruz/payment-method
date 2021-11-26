@@ -10,7 +10,7 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
     <meta http-equiv="refresh" content="3600">
-    <title>App Api Wompi</title>
+    <title>Cuotta Pay</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="assets/images/icons/favicon.png" type="image/x-icon">
